@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /home/apflexin/Desktop/claude_test/simtwin-website/public/videos)",
+      "Bash(mv /home/apflexin/Downloads/SimTwinWebsiteHero01.mp4 /home/apflexin/Desktop/claude_test/simtwin-website/public/videos/SimTwinWebsiteHero01.mp4)",
+      "Bash(git -C /home/apflexin/Desktop/claude_test/simtwin-website status)",
+      "Bash(gh auth *)",
+      "Read(//home/apflexin/**)",
+      "Read(//home/apflexin/.config/gh/**)",
+      "Bash(git add *)"
+    ]
+  }
+}

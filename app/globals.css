@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #090909;
+  --foreground: #ffffff;
+  --accent: #F2B800;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.font-mono, .stat-num {
+  font-family: var(--font-mono), monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.anim {
+  opacity: 0;
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.anim-d1 { animation-delay: 0.08s; }
+.anim-d2 { animation-delay: 0.18s; }
+.anim-d3 { animation-delay: 0.30s; }
+.anim-d4 { animation-delay: 0.44s; }
+.anim-d5 { animation-delay: 0.60s; }
+
+/* strip ReactFlow's default white node background */
+.react-flow__node {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* hide ReactFlow attribution button */
+.react-flow__panel.react-flow__attribution {
+  display: none !important;
+}
