@@ -1,213 +1,479 @@
-import ProductCards from "@/components/ProductCards";
+import TrybySection from "@/components/TrybySection";
+import ContactForm from "@/components/ContactForm";
+import RaportSlider from "@/components/RaportSlider";
 
-const ACCENT = "#F2B800";
+const A = "#F2B800";
 
-const STATS = [
-  { value: "1",         label: "Facility Live"  },
-  { value: "4+",        label: "Data Protocols" },
-  { value: "Real-time", label: "Processing"     },
-  { value: "AI-native", label: "Architecture"   },
+const HARDWARE = [
+  {
+    tag: "Czujniki indukcyjne",
+    title: "Sensory\ni PLC",
+    desc: "Czujniki indukcyjne, enkodery i sterowniki PLC tworzą cyfrowy obraz pracy każdej maszyny — w czasie rzeczywistym.",
+    imgs: ["/Materials/Hardware/Omron01.webp", "/Materials/Hardware/Induction02.webp"],
+  },
+  {
+    tag: "Computer Vision",
+    title: "Kamery\nAI",
+    desc: "Przemysłowe kamery ze zintegrowaną analizą obrazu — detekcja produktów, kontrola jakości, analiza ruchu.",
+    imgs: ["/Materials/Hardware/Camera.webp"],
+  },
+  {
+    tag: "HMI",
+    title: "Tablety\ni Interfejsy",
+    desc: "Dotykowe panele operatora i tablety z dostępem do danych produkcyjnych i raportów AI — gdziekolwiek jesteś.",
+    imgs: ["/Materials/Hardware/Tablet.webp"],
+  },
 ];
 
+const RAPORT_BULLETS = [
+  {
+    head: "Historia produkcji",
+    body: "Analiza danych dla dowolnego okresu — zmiany, tygodnie, miesiące.",
+  },
+  {
+    head: "Analiza zespołu",
+    body: "Wydajność, czas pracy i kluczowe wskaźniki każdego operatora.",
+  },
+  {
+    head: "AI generuje raporty",
+    body: "System analizuje dane i wskazuje zależności, trendy i anomalie.",
+  },
+  {
+    head: "Wczesne wykrywanie odchyleń",
+    body: "Identyfikacja ryzyka przestojów zanim staną się awarią.",
+  },
+];
+
+const TEAM = [
+  { name: "Antoni Padalak", role: "CEO / Founder", img: "/Materials/Teamwork/Antek.webp" },
+  { name: "Patryk", role: "Head of Onsite Operations", img: "/Materials/Teamwork/Patryk.webp" },
+  { name: "Czarek", role: "Head of Software", img: "/Materials/Teamwork/Czarek.webp" },
+];
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#090909] text-white font-sans">
+    <main className="min-h-screen bg-[#090909] text-white overflow-x-hidden" style={{ fontFamily: "var(--font-sans), Arial, sans-serif" }}>
 
-      {/* ─── Nav ─────────────────────────────────────────────────── */}
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
-        <div className="relative max-w-[1600px] mx-auto px-8 h-14 flex items-center justify-between">
-
-          <span className="text-sm font-black tracking-widest uppercase">
-            <span style={{ color: ACCENT }}>Sim</span>Twin
-          </span>
-
+      {/* ──────────────────── NAV ──────────────────── */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/70 to-transparent">
+        <div className="max-w-7xl mx-auto px-5 md:px-10 h-14 flex items-center justify-between">
+          <a href="#hero" className="text-sm font-black tracking-widest uppercase">
+            <span style={{ color: A }}>Sim</span>Twin
+          </a>
           <div className="hidden md:flex items-center gap-8">
             {[
-              { label: "Products", href: "#products" },
-              { label: "Pilot",    href: "#pilot"    },
-            ].map(({ label, href }) => (
+              ["Hardware", "#hardware"],
+              ["Stany", "#tryby"],
+              ["Raporty", "#raport"],
+              ["Zespół", "#zespol"],
+            ].map(([label, href]) => (
               <a
                 key={label}
                 href={href}
-                className="text-xs tracking-[0.1em] text-white/60 hover:text-white uppercase transition-colors"
+                className="text-xs tracking-[0.12em] text-white/50 hover:text-white uppercase transition-colors"
               >
                 {label}
               </a>
             ))}
           </div>
-
           <a
-            href="mailto:contact@simtwin.tech"
-            className="text-xs tracking-[0.1em] text-white/60 hover:text-white uppercase transition-colors"
+            href="#kontakt"
+            className="text-xs tracking-[0.15em] text-black font-black uppercase px-5 py-2 transition-opacity hover:opacity-90"
+            style={{ background: A }}
           >
-            Contact
+            Kontakt
           </a>
         </div>
       </nav>
 
-      {/* ─── Hero ────────────────────────────────────────────────── */}
-      <section className="relative h-screen overflow-hidden">
-
-        <video
-          src="/videos/SimTwinWebsiteHero02.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover bg-black"
+      {/* ──────────────────── HERO ──────────────────── */}
+      <section id="hero" className="relative h-screen min-h-[600px] overflow-hidden">
+        {/* BG image */}
+        <img
+          src="/Materials/Hero/AbedikDT.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/45" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-[#090909]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#090909]/60 via-transparent to-transparent" />
 
-        <div className="absolute bottom-0 left-0 right-0 px-10 pb-14 max-w-[1600px] mx-auto">
-          <div className="anim anim-d1 flex items-center gap-4 mb-6">
-            <span className="w-1.5 h-1.5 animate-pulse" style={{ background: ACCENT }} />
-            <span className="text-xs tracking-[0.2em] uppercase font-bold" style={{ color: ACCENT }}>
-              Pilot Deployed
-            </span>
-            <span className="text-white/25">·</span>
-            <span className="text-xs tracking-[0.15em] text-white/40 uppercase">
-              Book Printing Facility
+        <div className="relative z-10 h-full flex flex-col justify-end px-5 md:px-10 pb-16 max-w-7xl mx-auto">
+          {/* Tag */}
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-2 h-2 animate-pulse rounded-full" style={{ background: A }} />
+            <span className="text-xs tracking-[0.25em] uppercase font-bold" style={{ color: A }}>
+              Platforma Digital Twin dla Przemysłu
             </span>
           </div>
 
-          <h1 className="anim anim-d2 text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.93] mb-6 max-w-3xl">
-            One Platform.
+          {/* Heading */}
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter uppercase leading-[0.88] mb-6">
+            Jedna
             <br />
-            Every Machine.
+            Platforma
             <br />
-            <span style={{ color: ACCENT }}>Zero Silos.</span>
+            <span style={{ color: A }}>Cała Fabryka</span>
           </h1>
 
-          <p className="anim anim-d3 text-white/50 text-sm max-w-sm mb-8 leading-relaxed">
-            SimTwin digitizes your factory floor in real time — sensor data,
-            AI analysis, and 3D visualization in one operating layer.
+          {/* Sub */}
+          <p className="text-white/50 text-sm max-w-md leading-relaxed mb-10">
+            Cyfrowy obraz Twojej produkcji. Tworzymy cyfrowe odwzorowanie maszyn
+            w oparciu o dane z czujników i systemów sterowania.
+            <br />
+            <span className="text-white/30">
+              On-premise · Bezpieczna architektura · Dane pod pełną kontrolą
+            </span>
           </p>
 
-          <div className="anim anim-d4 flex gap-6 items-center">
+          {/* Stats strip */}
+          <div className="flex flex-wrap gap-6 mb-10">
+            {[
+              ["LIVE", "Aktualny stan maszyn"],
+              ["INTEGRACJA", "Wszystko w jednym miejscu"],
+              ["AI", "Analiza i raporty"],
+              ["SECURITY", "Dane pod kontrolą"],
+            ].map(([title, sub]) => (
+              <div key={title} className="flex flex-col gap-0.5">
+                <span className="text-xs font-black tracking-[0.18em] uppercase" style={{ color: A }}>
+                  {title}
+                </span>
+                <span className="text-[10px] tracking-[0.1em] text-white/30 uppercase">{sub}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="flex items-center gap-6">
             <a
-              href="mailto:contact@simtwin.tech"
-              style={{ background: ACCENT }}
-              className="inline-block px-7 py-3 text-black font-bold text-xs tracking-[0.15em] uppercase hover:opacity-90 transition-opacity"
+              href="#kontakt"
+              className="px-8 py-3.5 text-black font-black text-xs tracking-[0.2em] uppercase hover:opacity-90 transition-opacity"
+              style={{ background: A }}
             >
-              Request Early Access
+              Skontaktuj się z nami
             </a>
             <a
-              href="#products"
-              className="text-xs tracking-[0.12em] text-white/50 hover:text-white uppercase transition-colors flex items-center gap-2"
+              href="#hardware"
+              className="text-xs tracking-[0.12em] text-white/40 hover:text-white uppercase transition-colors flex items-center gap-2"
             >
-              See the Products <span>→</span>
+              Zobacz platformę <span>↓</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* ─── Stats strip ─────────────────────────────────────────── */}
-      <div className="border-y border-white/6">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/6">
-          {STATS.map((s) => (
-            <div key={s.label} className="py-8 px-8 first:pl-0">
-              <div className="text-2xl md:text-3xl font-black font-mono mb-1.5" style={{ color: ACCENT }}>
-                {s.value}
-              </div>
-              <div className="text-xs tracking-[0.14em] text-white/30 uppercase">
-                {s.label}
-              </div>
+      {/* ──────────────────── HARDWARE ──────────────────── */}
+      <section id="hardware" className="py-20 md:py-32 px-5 md:px-10">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="mb-12 md:mb-16">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-xs tracking-[0.25em] uppercase font-bold" style={{ color: A }}>
+                Moduł 00
+              </span>
+              <span className="text-white/20">·</span>
+              <span className="text-xs tracking-[0.2em] uppercase text-white/40">
+                Infrastruktura
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ─── Products grid ───────────────────────────────────────── */}
-      <section id="products">
-
-        {/* pull quote */}
-        <div className="px-6 md:px-10 pt-24 pb-16">
-          <p className="text-3xl md:text-4xl font-black tracking-tighter max-w-2xl" style={{ color: ACCENT }}>
-            "Once data flows, AI can finally do its job."
-          </p>
-        </div>
-
-        <ProductCards />
-      </section>
-
-      {/* ─── Cybersecurity strip ─────────────────────────────────── */}
-      <div className="border-y border-white/6 py-10 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-px h-8 bg-white/15" />
-            <p className="text-xs tracking-[0.2em] uppercase text-white/35 font-bold">
-              Security
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none mb-4">
+              Platforma
+              <br />
+              <span style={{ color: A }}>Sprzętowa</span>
+            </h2>
+            <p className="text-white/40 text-sm max-w-lg leading-relaxed">
+              Fizyczna warstwa SimTwin — od czujników przez kamery AI po
+              interfejsy operatora. Integrujemy to, co już masz, i dokładamy to, czego brakuje.
             </p>
           </div>
-          <div className="flex flex-wrap justify-center md:justify-end gap-x-10 gap-y-3">
-            {[
-              "Cybersecurity-first architecture",
-              "Air-gap compatible",
-              "On-premise deployment",
-              "No cloud dependency",
-              "Encrypted data at rest",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-2.5">
-                <span className="w-1 h-1 rounded-full" style={{ background: ACCENT }} />
-                <span className="text-xs tracking-[0.08em] text-white/40 uppercase">{item}</span>
+
+          {/* Context photo */}
+          <div className="relative w-full h-48 md:h-64 overflow-hidden mb-12 md:mb-16">
+            <img
+              src="/Materials/Hardware/Induction02.webp"
+              alt="Maszyna z czujnikami SimTwin"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#090909]/80 via-transparent to-[#090909]/80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#090909]/60 to-transparent" />
+            <div className="absolute bottom-4 left-5 md:left-8">
+              <span className="text-[10px] tracking-[0.2em] uppercase text-white/30">
+                Fizyczna instalacja · Abedik Drukarnia
+              </span>
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/6">
+            {HARDWARE.map((h) => (
+              <div key={h.tag} className="bg-[#090909] p-6 md:p-8 flex flex-col gap-5">
+                <div>
+                  <span
+                    className="text-[10px] tracking-[0.22em] uppercase font-bold px-2 py-0.5"
+                    style={{ color: A, background: `${A}18` }}
+                  >
+                    {h.tag}
+                  </span>
+                </div>
+                {/* Images */}
+                <div className="flex gap-1.5 h-52">
+                  {h.imgs.map((src, i) => (
+                    <div
+                      key={i}
+                      className="flex-1 overflow-hidden bg-white/3"
+                    >
+                      <img
+                        src={src}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <h3 className="text-2xl font-black tracking-tighter uppercase leading-tight whitespace-pre-line">
+                  {h.title}
+                </h3>
+                <p className="text-white/40 text-sm leading-relaxed flex-1">{h.desc}</p>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ─── Pilot ───────────────────────────────────────────────── */}
-      <section id="pilot" className="relative py-40 px-6 border-t border-white/5 overflow-hidden">
+      {/* ──────────────────── TRYBY ──────────────────── */}
+      <TrybySection />
 
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/SchemdtPhoto.webp')", filter: "blur(4px)", transform: "scale(1.05)" }}
-        />
-        <div className="absolute inset-0 bg-black/82" />
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <span className="w-1.5 h-1.5 animate-pulse" style={{ background: ACCENT }} />
-            <span className="text-xs tracking-[0.2em] uppercase font-bold" style={{ color: ACCENT }}>
-              Live in Production
-            </span>
+      {/* ──────────────────── RAPORT + AI ──────────────────── */}
+      <section id="raport" className="py-20 md:py-32 px-5 md:px-10 bg-[#070707]">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="mb-12 md:mb-16">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-xs tracking-[0.25em] uppercase font-bold" style={{ color: A }}>
+                Moduł 02
+              </span>
+              <span className="text-white/20">·</span>
+              <span className="text-xs tracking-[0.2em] uppercase text-white/40">
+                Analiza AI
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none mb-4">
+              Raporty
+              <br />
+              <span style={{ color: A }}>i Analiza AI</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 leading-[0.95] max-w-2xl">
-            Already Running
-            <br />
-            in a Real Factory
-          </h2>
-          <p className="text-white/40 leading-relaxed mb-10 text-sm max-w-sm">
-            Our first pilot is live at a book printing facility — sensors
-            integrated, data flowing, AI analysis active. We&apos;re proving
-            the product before scaling.
-          </p>
-          <a
-            href="mailto:contact@simtwin.tech"
-            style={{ background: ACCENT }}
-            className="inline-block px-8 py-3.5 text-black font-bold text-xs tracking-[0.15em] uppercase hover:opacity-90 transition-opacity"
-          >
-            Join the Next Pilot
-          </a>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start">
+            {/* Left: bullets */}
+            <div>
+              <p className="text-white/40 text-sm leading-relaxed mb-10 max-w-md">
+                Zbieramy dane, prowadzimy live monitoring, a następnie AI
+                generuje raporty — wskazując zależności i ryzyka zanim staną
+                się problemem.
+              </p>
+              <ul className="space-y-6">
+                {RAPORT_BULLETS.map((b) => (
+                  <li key={b.head} className="flex gap-4">
+                    <span
+                      className="w-1 flex-shrink-0 mt-1 self-stretch"
+                      style={{ background: A }}
+                    />
+                    <div>
+                      <div className="text-sm font-black uppercase tracking-tight mb-1">
+                        {b.head}
+                      </div>
+                      <div className="text-white/40 text-sm leading-relaxed">{b.body}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+
+            {/* Right: sliding report screenshots */}
+            <div className="relative">
+              <RaportSlider />
+              <div className="absolute -bottom-px left-0 right-0 h-20 bg-gradient-to-t from-[#070707] to-transparent pointer-events-none" />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ─── Footer ──────────────────────────────────────────────── */}
-      <footer className="py-10 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-white/25 text-xs tracking-[0.08em]">
-          <span className="font-black text-sm">
-            <span style={{ color: ACCENT }}>SIM</span>TWIN · simtwin.tech
+      {/* ──────────────────── TEAM ──────────────────── */}
+      <section id="zespol" className="py-20 md:py-32 px-5 md:px-10 relative overflow-hidden">
+        {/* BG office photo */}
+        <img
+          src="/Materials/Teamwork/Office02.webp"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-10"
+        />
+        <div className="absolute inset-0 bg-[#090909]/80" />
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="mb-12 md:mb-16">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-xs tracking-[0.25em] uppercase font-bold" style={{ color: A }}>
+                Zespół
+              </span>
+              <span className="text-white/20">·</span>
+              <span className="text-xs tracking-[0.2em] uppercase text-white/40">
+                Made in Poland · 2020
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none">
+              Ludzie za
+              <br />
+              <span style={{ color: A }}>SimTwin</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {TEAM.map((member) => (
+              <div key={member.name} className="group relative overflow-hidden aspect-[3/4]">
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="absolute inset-0 w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                />
+                {/* gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                {/* name at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="text-sm font-black uppercase tracking-tight mb-0.5">
+                    {member.name}
+                  </div>
+                  <div
+                    className="text-[10px] tracking-[0.18em] uppercase font-bold"
+                    style={{ color: A }}
+                  >
+                    {member.role}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────── CONTACT ──────────────────── */}
+      <section id="kontakt" className="py-20 md:py-32 px-5 md:px-10 bg-[#070707]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20">
+            {/* Left: info */}
+            <div>
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-xs tracking-[0.25em] uppercase font-bold" style={{ color: A }}>
+                  Kontakt
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none mb-6">
+                Skontaktuj
+                <br />
+                <span style={{ color: A }}>się z nami</span>
+              </h2>
+              <p className="text-white/40 text-sm leading-relaxed mb-10 max-w-sm">
+                Odkryj potencjał swojej produkcji. Pokażemy Ci co możemy zrobić
+                z danymi Twoich maszyn — bezpłatna konsultacja.
+              </p>
+
+              <div className="space-y-5">
+                <div className="flex items-center gap-4">
+                  <div
+                    className="w-10 h-10 flex items-center justify-center border"
+                    style={{ borderColor: `${A}40` }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2 2h10v10H2V2zm0 3h10M7 2v10"
+                        stroke={A}
+                        strokeWidth="1.2"
+                        strokeLinecap="square"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-[10px] tracking-[0.15em] text-white/30 uppercase mb-0.5">
+                      Telefon
+                    </div>
+                    <a
+                      href="tel:+48603518848"
+                      className="text-sm font-bold text-white/80 hover:text-white transition-colors"
+                    >
+                      +48 603 518 848
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div
+                    className="w-10 h-10 flex items-center justify-center border"
+                    style={{ borderColor: `${A}40` }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <rect x="1" y="3" width="12" height="8" stroke={A} strokeWidth="1.2" strokeLinecap="square" />
+                      <path d="M1 3l6 5 6-5" stroke={A} strokeWidth="1.2" strokeLinecap="square" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-[10px] tracking-[0.15em] text-white/30 uppercase mb-0.5">
+                      Email
+                    </div>
+                    <a
+                      href="mailto:antoni@simtwin.tech"
+                      className="text-sm font-bold text-white/80 hover:text-white transition-colors"
+                    >
+                      antoni@simtwin.tech
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div
+                    className="w-10 h-10 flex items-center justify-center border"
+                    style={{ borderColor: `${A}40` }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <circle cx="7" cy="7" r="5" stroke={A} strokeWidth="1.2" />
+                      <path d="M7 2v5l3 2" stroke={A} strokeWidth="1.2" strokeLinecap="square" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-[10px] tracking-[0.15em] text-white/30 uppercase mb-0.5">
+                      Web
+                    </div>
+                    <span className="text-sm font-bold text-white/80">simtwin.tech</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: form */}
+            <div>
+              <ContactForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────── FOOTER ──────────────────── */}
+      <footer className="py-8 px-5 md:px-10 border-t border-white/5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-white/25 text-xs tracking-[0.08em]">
+          <span className="font-black text-base">
+            <span style={{ color: A }}>SIM</span>TWIN
           </span>
-          <span>© 2025 SimTwin. All rights reserved.</span>
-          <a href="mailto:contact@simtwin.tech" className="hover:text-white/60 transition-colors">
-            contact@simtwin.tech
-          </a>
+          <span>© 2025 SimTwin. Wszelkie prawa zastrzeżone.</span>
+          <div className="flex items-center gap-5">
+            <a href="tel:+48603518848" className="hover:text-white/60 transition-colors">
+              +48 603 518 848
+            </a>
+            <a
+              href="mailto:antoni@simtwin.tech"
+              className="hover:text-white/60 transition-colors"
+            >
+              antoni@simtwin.tech
+            </a>
+          </div>
         </div>
       </footer>
-
     </main>
   );
 }
