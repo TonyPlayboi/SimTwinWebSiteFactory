@@ -6,7 +6,7 @@ const A = "#F2B800";
 
 const HARDWARE = [
   {
-    tag: "Czujniki indukcyjne",
+    tag: "Warstwa sensoryczna",
     title: "Sensory\ni PLC",
     desc: "Czujniki indukcyjne, enkodery i sterowniki PLC tworzą cyfrowy obraz pracy każdej maszyny — w czasie rzeczywistym.",
     imgs: ["/Materials/Hardware/Omron01.webp", "/Materials/Hardware/Induction02.webp"],
@@ -45,9 +45,9 @@ const RAPORT_BULLETS = [
 ];
 
 const TEAM = [
-  { name: "Antoni Padalak", role: "CEO / Founder", img: "/Materials/Teamwork/Antek.webp" },
-  { name: "Patryk", role: "Head of Onsite Operations", img: "/Materials/Teamwork/Patryk.webp" },
-  { name: "Czarek", role: "Head of Software", img: "/Materials/Teamwork/Czarek.webp" },
+  { name: "Antoni Padalak", role: "CEO / Founder", img: "/Materials/Teamwork/Antek02.webp" },
+  { name: "Patryk", role: "Head of Onsite Operations", img: "/Materials/Teamwork/Patryk02.webp" },
+  { name: "Czarek", role: "Head of Software", img: "/Materials/Teamwork/Czarek02.webp" },
 ];
 
 export default function Home() {
